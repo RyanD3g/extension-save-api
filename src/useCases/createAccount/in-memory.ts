@@ -7,13 +7,14 @@ export class CreateAccountControllerInMemory extends CreateAccountEntite {
     constructor(){
         super();
     };
-    static createAccount<T extends { nickname: string; }, S extends Response>(body: T, res?:S) {
+    static createAccount<T extends { nickname: string; password: string; }, S extends Response>(body: T, res?:S) {
         try {
             
             const validateData = validatorSchemaCreateAccount(body);
             const accountUserModelExample:Users[] = [{
                 id:'123',
                 nickname:'teste',
+                password:body.password,
                 createdAt:new Date(),
                 updatedAt:new Date(),
             }];
@@ -24,6 +25,7 @@ export class CreateAccountControllerInMemory extends CreateAccountEntite {
             const createUserInModel = accountUserModelExample.push({
                 id:'3456',
                 nickname:body.nickname,
+                password:body.password,
                 createdAt:new Date(),
                 updatedAt:new Date(),
             });
